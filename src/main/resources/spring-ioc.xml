@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--http://www.cnblogs.com/flying607/p/5132293.html 配置 -->
+    <!--http://blog.csdn.net/javazejian/article/details/54561302 -->
+
+    <!-- 使用注解时必须启动注解驱动 -->
+    <context:annotation-config/>
+
+    <!--基于占位符方式 配置properties -->
+    <context:property-placeholder
+            location="conf/jdbc.properties,
+                      conf/jdbc2.properties"/>
+
+
+    <!-- 声明accountDao对象,交给spring创建 -->
+    <bean name="accountDao" class="com.slyang.test.springioc.dao.AccountDaoImpl"/>
+
+    <!-- 声明accountService对象,交给spring创建 -->
+    <bean name="accountService" class="com.slyang.test.springioc.service.AccountServiceImpl">
+        <!-- 注入accountDao对象,需要set方法-->
+        <property name="accountDao" ref="accountDao"/>
+    </bean>
+
+    <bean name="accountService2" class="com.slyang.test.springioc.service.AccountServiceImpl2"/>
+
+    <bean name="dbConf" class="com.slyang.test.springioc.service.MyDBConf"/>
+
+</beans>
