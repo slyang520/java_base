@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+    <!-- 引入外部的属性文件 -->
+    <context:property-placeholder location="classpath:conf/jdbc.properties"/>
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.SingleConnectionDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <!-- 配置Service务层 引用dao需要实现其set方法 -->
+    <bean id="accountService" class="com.slyang.test.springtr.demo2.AccountServiceImpl">
+        <property name="accountDao" ref="accountDao"/>
+    </bean>
+
+    <!-- 配置Dao层 -->
+    <bean id="accountDao" class="com.slyang.test.springtr.demo2.AccountDaoImpl">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- 配置事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- 配置业务层的代理 -->
+    <bean id="accountServiceProxy" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <!-- 配置目标对象 -->
+        <property name="target" ref="accountService"/>
+        <!-- 注入事务管理器 -->
+        <property name="transactionManager" ref="transactionManager"/>
+        <!-- 注入事务属性 -->
+        <property name="transactionAttributes">
+            <props>
+                <!--
+                    prop的格式：
+                    * PROPAGATION	:事务的传播行为
+                    * ISOLATION		 ：事务的隔离级别
+                    * readOnly 		 ：只读
+                    * -EXception	 ：发生哪些异常回滚事务
+                    * +Exception	 ：发生哪些事务不回滚事务
+                 -->
+                <prop key="transfer">PROPAGATION_REQUIRED</prop>
+            </props>
+        </property>
+    </bean>
+
+</beans>
