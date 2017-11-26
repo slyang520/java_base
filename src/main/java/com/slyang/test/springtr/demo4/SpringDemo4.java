@@ -8,7 +8,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import javax.annotation.Resource;
 
 /**
- * Spring 声明式事务管理的方式2的测试: 基于AspectJ的xml方式的配置
+ * Spring 声明式事务管理的方式2的测试: 基于注解的方式的配置
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)

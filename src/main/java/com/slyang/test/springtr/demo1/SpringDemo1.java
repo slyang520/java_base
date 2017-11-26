@@ -10,7 +10,6 @@ import javax.annotation.Resource;
 /**
  * 转账案例测试类
  *
- * @author 61582
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:spring-tr-1.xml")

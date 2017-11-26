@@ -7,10 +7,16 @@
     <aop:aspectj-autoproxy/>
 
     <!-- 定义目标对象 -->
-    <bean id="userDaos" class="com.slyang.test.springaop.springaop.UserDaoImp"/>
+    <bean id="userDaos" class="com.slyang.test.springaop.springaop.testAop.UserDaoImp"/>
+
+    <!-- 定义目标对象 -->
+    <bean id="userDaos2" class="com.slyang.test.springaop.springaop.testAop.UserDaoImp2"/>
+
     <!-- 定义aspect类 -->
     <bean name="myAspectJ" class="com.slyang.test.springaop.springaop.Aspect.MyAspect"/>
     <!-- 定义aspect类 -->
     <bean name="myAspectJ2" class="com.slyang.test.springaop.springaop.Aspect.MyAspect2"/>
+
+    <bean name="myAspectJ3" class="com.slyang.test.springaop.springaop.Aspect.MyAspect3"/>
 
 </beans>

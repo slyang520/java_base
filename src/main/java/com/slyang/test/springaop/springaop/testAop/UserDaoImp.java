@@ -1,4 +1,6 @@
-package com.slyang.test.springaop.springaop;
+package com.slyang.test.springaop.springaop.testAop;
+
+import com.slyang.test.springaop.springaop.testAop.UserDao;
 
 public class UserDaoImp implements UserDao {
 	@Override

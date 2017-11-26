@@ -16,12 +16,6 @@ import java.util.Map;
 
 public class Test {
 
-//	protected final MapperRegistry mapperRegistry = new MapperRegistry();
-//	protected final InterceptorChain interceptorChain = new InterceptorChain();
-//	protected final TypeHandlerRegistry typeHandlerRegistry = new TypeHandlerRegistry();
-//	protected final TypeAliasRegistry typeAliasRegistry = new TypeAliasRegistry();
-//	protected final LanguageDriverRegistry languageRegistry = new LanguageDriverRegistry();
-
 	public static void main(String[] args) {
 
 		List<Map<String, Object>> resultMap;

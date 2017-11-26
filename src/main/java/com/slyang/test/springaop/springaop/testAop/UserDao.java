@@ -1,4 +1,4 @@
-package com.slyang.test.springaop.springaop;
+package com.slyang.test.springaop.springaop.testAop;
 
 public interface UserDao {
 

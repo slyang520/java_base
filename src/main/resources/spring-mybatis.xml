@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="conf/jdbc.properties"/>
+
+    <bean id="dataSource" class="com.slyang.test.mybatis.usespring.RouteDataSource">
+        <property name="readDataSource" ref="dataSourceRead"/>
+        <property name="writeDataSource" ref="dataSourceWrite"/>
+    </bean>
+
+    <bean id="dataSourceRead" class="org.springframework.jdbc.datasource.SingleConnectionDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="suppressClose" value="true"/>
+    </bean>
+
+    <bean id="dataSourceWrite" class="org.springframework.jdbc.datasource.SingleConnectionDataSource">
+        <property name="driverClassName" value="${jdbc2.driver}"/>
+        <property name="url" value="${jdbc2.url}"/>
+        <property name="username" value="${jdbc2.username}"/>
+        <property name="password" value="${jdbc2.password}"/>
+        <property name="suppressClose" value="true"/>
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:spring-mybatis-config.xml"/>
+        <property name="mapperLocations" value="classpath:spring_mybatis_mapper/**/*.xml"/>
+        <property name="plugins">
+            <array>
+                <ref bean="mybatisPlugin"/>
+            </array>
+        </property>
+    </bean>
+
+    <!-- spring 非XML引入的Mapper-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.slyang.test.mybatis.usespring.mapper"/>
+        <!-- optional unless there are multiple session factories defined -->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean name="mybatisPlugin" class="com.slyang.test.mybatis.usespring.MybatisWriteReaderPlugin"/>
+
+</beans>

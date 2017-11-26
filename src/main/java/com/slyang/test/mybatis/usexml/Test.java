@@ -24,8 +24,6 @@ public class Test {
 
 		List<Map<String, Object>> resultMap;
 
-		LanguageDriver languageDriver;
-
 		try {
 			TestMapper testMapper = session.getMapper(TestMapper.class);
 			resultMap = testMapper.test();
