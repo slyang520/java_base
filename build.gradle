@@ -3,18 +3,27 @@ version '1.0-SNAPSHOT'
 
 buildscript {
     ext.kotlin_version = '1.1.4-2'
+    ext.springBootVersion = '1.5.6.RELEASE'
 
     repositories {
         maven { url "http://maven.aliyun.com/nexus/content/repositories/central" }
         mavenCentral()
     }
     dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+//        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath 'com.bmuschko:gradle-tomcat-plugin:2.4.2'
     }
 }
 
+apply plugin: 'war'
 apply plugin: 'java'
-apply plugin: 'kotlin'
+//apply plugin: 'kotlin'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'application'
+apply plugin: 'com.bmuschko.tomcat'
+
+mainClassName = 'com.slyang.test.mybatis.usexml.Test'
 
 sourceCompatibility = 1.8
 
@@ -28,7 +37,7 @@ repositories {
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+//    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     compile group: 'junit', name: 'junit', version: '4.12'
 
@@ -47,6 +56,19 @@ dependencies {
     compile group: 'org.springframework', name: 'spring-tx', version: '4.3.12.RELEASE'
     compile group: 'org.springframework', name: 'spring-jdbc', version: '4.3.12.RELEASE'
     compile group: 'org.springframework', name: 'spring-test', version: '4.3.12.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-core', version: '4.2.3.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-web', version: '4.2.3.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-config', version: '4.2.3.RELEASE'
 
+    providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.0.1'
 
+    def tomcatVersion = '7.0.59'
+    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+            "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}",
+            "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
+    
 }
+
+//tomcat {
+//    httpPort = 8090
+//}

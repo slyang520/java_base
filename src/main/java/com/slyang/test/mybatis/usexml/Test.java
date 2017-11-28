@@ -1,15 +1,12 @@
 package com.slyang.test.mybatis.usexml;
 
 import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.scripting.LanguageDriver;
-import org.apache.ibatis.scripting.xmltags.XMLScriptBuilder;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +24,8 @@ public class Test {
 		try {
 			TestMapper testMapper = session.getMapper(TestMapper.class);
 			resultMap = testMapper.test();
+			
+			System.out.println("sdfasdfasdfasfsadfsdsad");
 		} finally {
 			session.close();
 		}

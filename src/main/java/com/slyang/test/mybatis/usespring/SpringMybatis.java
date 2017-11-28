@@ -24,7 +24,6 @@ public class SpringMybatis {
 	public void test1() {
 		testMapper.test();
 		testMapper.test2();
-
 		testXMLMapper.test();
 		testXMLMapper.test2();
 	}

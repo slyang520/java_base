@@ -27,6 +27,11 @@ public class RouteDataSource extends AbstractRoutingDataSource {
 	}
 
 	@Override
+	protected DataSource determineTargetDataSource() {
+		return super.determineTargetDataSource();
+	}
+
+	@Override
 	protected Object determineCurrentLookupKey() {
 
 		RouteDataSourceHolder.RouterDataSourceName routerDataSourceName =
@@ -40,16 +45,8 @@ public class RouteDataSource extends AbstractRoutingDataSource {
 		return RouteDataSourceHolder.RouterDataSourceName.READ.name();
 	}
 
-	public DataSource getWriteDataSource() {
-		return writeDataSource;
-	}
-
 	public void setWriteDataSource(DataSource writeDataSource) {
 		this.writeDataSource = writeDataSource;
-	}
-
-	public DataSource getReadDataSource() {
-		return readDataSource;
 	}
 
 	public void setReadDataSource(DataSource readDataSource) {
