@@ -22,10 +22,14 @@ public class SpringMybatis {
 
 	@Test
 	public void test1() {
+
+		RouteDataSourceHolder.putDataSource(RouteDataSourceHolder.RouterDataSourceName.WRITE);
 		testMapper.test();
-		testMapper.test2();
-		testXMLMapper.test();
-		testXMLMapper.test2();
+	//	testMapper.test2();
+
+
+//		testXMLMapper.test();
+//		testXMLMapper.test2();
 	}
 
 }
