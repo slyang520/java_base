@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:application name="demo-provider"/>
+    <dubbo:registry address="redis://127.0.0.1:6379"/>
+    
+    <dubbo:protocol name="dubbo" port="20880"/>
+
+    <dubbo:service
+            interface="com.slyang.test.dubbo.DemoService"
+            version="1.0"
+            group="userCenter"
+            ref="demoService"/>
+
+    <dubbo:service
+            interface="com.slyang.test.dubbo.DemoService"
+            version="2.0"
+            group="userCenter"
+            ref="demoService2"/>
+
+    <dubbo:service
+            interface="com.slyang.test.dubbo.DemoService"
+            version="1.0"
+            group="messageCenter"
+            ref="demoService3"/>
+
+    <dubbo:service
+            interface="com.slyang.test.dubbo.DemoService"
+            version="2.0"
+            group="messageCenter"
+            ref="demoService4"/>
+
+    <bean id="demoService" class="com.slyang.test.dubbo.provider.DemoServiceImpl"/>
+    <bean id="demoService2" class="com.slyang.test.dubbo.provider.DemoServiceImplV2"/>
+    <bean id="demoService3" class="com.slyang.test.dubbo.provider.DemoMessageServiceImpl"/>
+    <bean id="demoService4" class="com.slyang.test.dubbo.provider.DemoMessageServiceImplV2"/>
+    
+</beans>

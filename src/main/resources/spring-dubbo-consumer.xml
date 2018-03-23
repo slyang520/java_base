@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:application name="demo-consumer"/>
+    <dubbo:registry address="redis://127.0.0.1:6379"/>
+
+    <dubbo:reference id="demoService"
+                     version="1.0"
+                     group="userCenter"
+                     interface="com.slyang.test.dubbo.DemoService"/>
+    
+    <dubbo:reference id="demoServiceV2"
+                     version="2.0"
+                     group="userCenter"
+                     interface="com.slyang.test.dubbo.DemoService"/>
+
+    <dubbo:reference id="demoMessageService"
+                     version="1.0"
+                     group="messageCenter"
+                     interface="com.slyang.test.dubbo.DemoService"/>
+
+    <dubbo:reference id="demoMessageServiceV2"
+                     version="2.0"
+                     group="messageCenter"
+                     interface="com.slyang.test.dubbo.DemoService"/>
+
+</beans>

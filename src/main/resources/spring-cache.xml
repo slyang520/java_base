@@ -23,8 +23,7 @@
                 <!-- 基于ReDis缓存 TODO -->
                 <!-- redis -->
                 <!--<bean class="org.springframework.data.redis.cache.RedisCache">-->
-                <!--<property name="redisTemplate" ref="redisTemplate" />-->
-                <!--<property name="name" value="user" />-->
+                <!--<property name="name" value="redisCache" />-->
                 <!--</bean>-->
             </set>
         </property>

@@ -63,7 +63,9 @@ dependencies {
     // redis client
     compile 'redis.clients:jedis:2.9.0'
     compile 'org.springframework.data:spring-data-redis:2.0.3.RELEASE'
-
+    compile 'com.alibaba:dubbo:2.6.1'
+    // activiti
+    compile 'org.activiti:activiti-engine:5.18.0'
     compile 'org.slf4j:slf4j-simple:1.7.25'
 
     providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.0.1'
