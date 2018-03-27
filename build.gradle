@@ -67,6 +67,8 @@ dependencies {
     // activiti
     compile 'org.activiti:activiti-engine:5.18.0'
     compile 'org.slf4j:slf4j-simple:1.7.25'
+    // quartz
+    compile group: 'org.quartz-scheduler', name: 'quartz', version: '2.3.0'
 
     providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.0.1'
 

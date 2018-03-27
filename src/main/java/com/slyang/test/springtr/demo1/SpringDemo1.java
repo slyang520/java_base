@@ -23,4 +23,5 @@ public class SpringDemo1 {
 	public void demo1() {
 		accountService.transfer("sly", "sly2", 2d);
 	}
+
 }
