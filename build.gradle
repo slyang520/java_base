@@ -66,6 +66,9 @@ dependencies {
     compile 'com.alibaba:dubbo:2.6.1'
     // activiti
     compile 'org.activiti:activiti-engine:5.22.0'
+    compile 'org.activiti:activiti-modeler:5.22.0'
+    compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.9'
+
     compile 'org.activiti:activiti-spring:5.22.0'
     compile 'org.slf4j:slf4j-simple:1.7.25'
     // quartz

@@ -4,7 +4,15 @@
         <documentation>请假流程演示</documentation>
         <startEvent id="startevent1" name="Start" activiti:initiator="applyUserId"/>
 
-        <userTask id="deptLeaderAudit" name="部门领导审批" activiti:candidateUsers="${deptLeaderAudit}"/>
+        <userTask id="deptLeaderAudit" name="部门领导审批">
+
+            <extensionElements>
+                <activiti:taskListener
+                        event="create"
+                        class="com.slyang.test.activiti.EventCreate"/>
+            </extensionElements>
+
+        </userTask>
 
         <exclusiveGateway id="exclusivegateway5" name="Exclusive Gateway"/>
 
@@ -25,9 +33,9 @@
                         class="com.slyang.test.activiti.EventCompleteListener"/>
             </extensionElements>
         </userTask>
-
         <endEvent id="endevent1" name="End"/>
         <exclusiveGateway id="exclusivegateway7" name="Exclusive Gateway"/>
+
         <sequenceFlow id="flow2" name="" sourceRef="startevent1" targetRef="deptLeaderAudit"/>
         <sequenceFlow id="flow3" name="" sourceRef="deptLeaderAudit" targetRef="exclusivegateway5"/>
         <sequenceFlow id="flow4" name="不同意" sourceRef="exclusivegateway5" targetRef="modifyApply">

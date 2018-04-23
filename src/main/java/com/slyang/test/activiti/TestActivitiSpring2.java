@@ -63,6 +63,13 @@ public class TestActivitiSpring2 {
 	 * 任务Service，用于
 	 * 管理和查询任务，
 	 * 例如签收、办理、指派等
+	 *
+	 * 签收
+	 * taskService.claim(String taskId, String userId);
+	 * 办理
+	 * taskService.complete(String taskId, Map<String, Object> variables);
+	 * 指派
+	 * taskService.setAssignee(taskId, userId);
 	 */
 	@Autowired
 	TaskService taskService;
@@ -94,6 +101,12 @@ public class TestActivitiSpring2 {
 						.tenantId("12345")
 						.category("")
 						.deploy();
+
+//		BpmnModel bpmnModel;
+//		Collection<FlowElement> flowElements = model.getMainProcess().getFlowElements();
+
+
+
 	}
 
 	/**
@@ -117,12 +130,12 @@ public class TestActivitiSpring2 {
 		/**
 		 * 启动一个流程
 		 */
-		String startUserId = "startUserId";
+ 		String startUserId = "startUserId";
 		String managerUserID = "manager_userId";
 		String hrUserID = "hr_userId";
 
 
-		ProcessDefinition processDefinition = processDefinitionList.get(0);
+		ProcessDefinition processDefinition = processDefinitionList.get(processDefinitionList.size()-1);
 
 		// 设置谁启动了流程
 		identityService.setAuthenticatedUserId(startUserId);
@@ -131,10 +144,12 @@ public class TestActivitiSpring2 {
 		Map<String, Object> vars = new HashMap<String, Object>();
 
 		vars.put("applyUserId", startUserId);
-		vars.put("deptLeaderAudit", managerUserID);
+		//vars.put("deptLeaderAudit", managerUserID);
 		vars.put("hrAudit", hrUserID);
 
-		ProcessInstance processInstance = runtimeService.startProcessInstanceById(processDefinition.getId(), vars);
+		ProcessInstance processInstance = runtimeService.
+				startProcessInstanceById(processDefinition.getId(), vars);
+
 		identityService.setAuthenticatedUserId(null);
 		/**
 		 * 模拟部门经理同意
@@ -201,6 +216,5 @@ public class TestActivitiSpring2 {
 
 
 	}
-
 
 }
