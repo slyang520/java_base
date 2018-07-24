@@ -1,12 +1,17 @@
 package com.slyang.test.activiti;
 
 import org.activiti.engine.*;
+import org.activiti.engine.history.HistoricActivityInstance;
+import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
+import org.activiti.engine.impl.pvm.process.ActivityImpl;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -20,6 +25,8 @@ import static org.junit.Assert.assertNotNull;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:spring-activiti.xml")
 public class TestActivitiSpring2 {
+
+	Logger logger = LoggerFactory.getLogger(TestActivitiSpring2.class);
 
 	@Autowired
 	ProcessEngine processEngine;
@@ -76,6 +83,9 @@ public class TestActivitiSpring2 {
 
 	@Autowired
 	IdentityService identityService;
+
+	@Autowired
+	HistoryService historyService;
 
 	/**
 	 */
@@ -137,20 +147,21 @@ public class TestActivitiSpring2 {
 
 		ProcessDefinition processDefinition = processDefinitionList.get(processDefinitionList.size()-1);
 
-		// 设置谁启动了流程
-		identityService.setAuthenticatedUserId(startUserId);
 
 		// 设置变量
 		Map<String, Object> vars = new HashMap<String, Object>();
 
 		vars.put("applyUserId", startUserId);
-		//vars.put("deptLeaderAudit", managerUserID);
+		vars.put("deptLeaderAudit", managerUserID);
 		vars.put("hrAudit", hrUserID);
 
+		// 设置谁启动了流程
+		identityService.setAuthenticatedUserId(startUserId);
 		ProcessInstance processInstance = runtimeService.
 				startProcessInstanceById(processDefinition.getId(), vars);
-
 		identityService.setAuthenticatedUserId(null);
+
+
 		/**
 		 * 模拟部门经理同意
 		 */
@@ -159,6 +170,9 @@ public class TestActivitiSpring2 {
 		List<Task> toClaimList = taskService
 				.createTaskQuery()
 				.taskCandidateUser(managerUserID).active().list();
+
+
+		taskService.setAssignee(toClaimList.get(0).getId(),managerUserID);
 
 		//1.2 已经签收的任务
 		List<Task> todoList =
@@ -216,5 +230,31 @@ public class TestActivitiSpring2 {
 
 
 	}
+
+
+	/**
+	 * 查询历史节点运行情况
+	 */
+	@Test
+	public void queryHistoryAct(){
+
+		List<HistoricActivityInstance> list=processEngine.getHistoryService() // 历史任务Service
+				.createHistoricActivityInstanceQuery() // 创建历史活动实例查询
+				.taskAssignee("startUserId")
+				.finished() // 查询已经完成的任务
+				.list();
+		
+		for(HistoricActivityInstance hai:list){
+			logger.error("任务ID:"+hai.getId());
+			logger.error("流程实例ID:"+hai.getProcessInstanceId());
+			logger.error("活动名称："+hai.getActivityName());
+			logger.error("办理人："+hai.getAssignee());
+			logger.error("开始时间："+hai.getStartTime());
+			logger.error("结束时间："+hai.getEndTime());
+			logger.error("===========================");
+		}
+
+	}
+
 
 }

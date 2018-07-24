@@ -12,7 +12,7 @@ public class EventCreate implements TaskListener {
 	public void notify(DelegateTask delegateTask) {
 
 		delegateTask.addCandidateUser("manager_userId");
-		//delegateTask.setAssignee("manager_userId");
+		delegateTask.setAssignee("manager_userId");
 
 	}
 

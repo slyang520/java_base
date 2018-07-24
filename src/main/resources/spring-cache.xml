@@ -10,7 +10,7 @@
 
     <cache:annotation-driven/>
 
-    <bean id="accountServiceBean" class="com.slyang.test.springcache.service.AccountService"/>
+    <bean id="accountServiceBean" class="com.slyang.test.springcache.AccountService"/>
 
     <!-- generic cache manager -->
     <bean id="cacheManager"

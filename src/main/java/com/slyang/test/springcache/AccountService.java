@@ -1,4 +1,4 @@
-package com.slyang.test.springcache.service;
+package com.slyang.test.springcache;
 
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.config.CacheNamespaceHandler;

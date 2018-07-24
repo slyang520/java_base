@@ -89,9 +89,9 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="reportBack" id="Shape-reportBack">
-        <omgdc:Bounds height="45.0" width="105.0" x="590.0" y="80.0"/>
+        <omgdc:Bounds height="55.0" width="105.0" x="590.0" y="80.0"/>
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="45.0" width="105.0" x="0.0" y="0.0"/>
+          <omgdc:Bounds height="55.0" width="105.0" x="0.0" y="0.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="endevent1" id="Shape-endevent1">
@@ -107,9 +107,9 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="_2" id="Shape-_2">
-        <omgdc:Bounds height="50.0" width="85.0" x="685.0" y="190.0"/>
+        <omgdc:Bounds height="55.0" width="85.0" x="685.0" y="190.0"/>
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="50.0" width="85.0" x="0.0" y="0.0"/>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2" sourceElement="startevent1" targetElement="deptLeaderAudit">
@@ -149,7 +149,7 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow7" id="BPMNEdge_flow7" sourceElement="exclusivegateway6" targetElement="reportBack">
         <omgdi:waypoint x="527.0" y="103.0"/>
-        <omgdi:waypoint x="590.0" y="102.5"/>
+        <omgdi:waypoint x="590.0" y="107.5"/>
         <bpmndi:BPMNLabel>
           <omgdc:Bounds height="11.0" width="100.0" x="-22.0" y="-17.0"/>
         </bpmndi:BPMNLabel>
@@ -163,7 +163,7 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow8" id="BPMNEdge_flow8" sourceElement="reportBack" targetElement="endevent1">
-        <omgdi:waypoint x="641.0" y="125.0"/>
+        <omgdi:waypoint x="641.0" y="135.0"/>
         <omgdi:waypoint x="641.0" y="283.0"/>
         <bpmndi:BPMNLabel>
           <omgdc:Bounds height="-1.0" width="-1.0" x="-1.0" y="-1.0"/>

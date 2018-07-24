@@ -1,10 +1,9 @@
-package com.slyang.test.springcache.service;
+package com.slyang.test.springcache;
 
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.Cache;
 import org.springframework.cache.support.SimpleCacheManager;
-import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -15,7 +14,6 @@ public class Test {
 	@Autowired
 	AccountService accountService;
 
-	Cache cache;
 
 	@Autowired
 	SimpleCacheManager simpleCacheManager;
