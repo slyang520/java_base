@@ -19,7 +19,7 @@ public class AtomicsTest {
 // 由于硬件指令支持当然不需要加锁了。
 //
 
-//    compare and swap    CAS
+//    compare and swap    CAS 乐观锁
 
     // AtomicInteger and AtomicLong                                     A {int, long} value that may be updated atomically
     // AtomicReference                                                  An object reference that may be updated atomically
@@ -54,7 +54,7 @@ public class AtomicsTest {
     public void helloAtomic() throws InterruptedException {
         Sequencer sequencer = new Sequencer();
 
-        int loopLength=100000;
+        int loopLength=200000;
 
         Runnable execNext = () -> {
             for(int i=0;i<loopLength;i++){
@@ -68,7 +68,7 @@ public class AtomicsTest {
         new Thread(execNext).start();
 
 
-        Thread.sleep(1000*15);
+        Thread.sleep(1000*40);
 
         System.out.println("The expected value is "+loopLength*3);
 
