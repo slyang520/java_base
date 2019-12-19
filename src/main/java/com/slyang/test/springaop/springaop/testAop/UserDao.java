@@ -2,7 +2,7 @@ package com.slyang.test.springaop.springaop.testAop;
 
 public interface UserDao {
 
-	int addUser();
+	int addUser(String params1);
 
 	void updateUser();
 

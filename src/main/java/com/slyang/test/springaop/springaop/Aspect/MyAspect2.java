@@ -1,9 +1,6 @@
 package com.slyang.test.springaop.springaop.Aspect;
 
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 import org.springframework.core.Ordered;
 
 @Aspect
@@ -23,12 +20,12 @@ public class MyAspect2 implements Ordered {
 
 	@Before("myPointcut()")
 	public void beforeOne() {
-		System.out.println("前置通知....执行顺序1--AspectTwo");
+		System.out.println("MyAspect2 前置通知....执行顺序1--AspectTwo"+"order: "+getOrder());
 	}
 
 	@Before("myPointcut()")
 	public void beforeTwo() {
-		System.out.println("前置通知....执行顺序2--AspectTwo");
+		System.out.println("MyAspect2 前置通知....执行顺序2--AspectTwo");
 	}
 
 	@AfterReturning(value = "myPointcut()")
@@ -38,7 +35,15 @@ public class MyAspect2 implements Ordered {
 
 	@AfterReturning(value = "myPointcut()")
 	public void AfterReturningFour() {
-		System.out.println("后置通知....执行顺序4--AspectTwo");
+		System.out.println("MyAspect2 后置通知....执行顺序4--AspectTwo");
 	}
 
+	/**
+	 * 无论什么情况下都会执行的方法
+	 */
+	@After(value = "myPointcut()")
+	public void after() {
+		System.out.println("MyAspect2 最终通知...."+"order: "+getOrder());
+		//throw new RuntimeException("123");
+	}
 }

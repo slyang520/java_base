@@ -14,12 +14,14 @@
     <bpmn:dataObject id="DataObject_0nwy5xo" isCollection="false"/>
     <bpmn:startEvent id="_2" name="StartEvent"/>
     <bpmn:startEvent id="_3" name="StartEvent"/>
-    <bpmn:userTask activiti:exclusive="true" id="_4" name="UserTask"/>
+    <bpmn:userTask activiti:exclusive="true" id="_4" name="UserTask">
+      <bpmn:multiInstanceLoopCharacteristics isSequential="true"/>
+    </bpmn:userTask>
     <bpmn:exclusiveGateway gatewayDirection="Unspecified" id="_5" name="ExclusiveGateway"/>
     <bpmn:exclusiveGateway gatewayDirection="Unspecified" id="_6" name="ExclusiveGateway">
       <bpmn:extensionElements>
-        <activiti:executionListener event="start"/>
-        <activiti:executionListener event="start"/>
+        <bpmn:activiti:executionListener event="start"/>
+        <bpmn:activiti:executionListener event="start"/>
       </bpmn:extensionElements>
     </bpmn:exclusiveGateway>
   </bpmn:process>

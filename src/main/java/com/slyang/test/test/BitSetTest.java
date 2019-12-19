@@ -34,7 +34,7 @@ public class BitSetTest {
              //测试初始化
       @Test
       public void testInit(){
-                 //断点进去看
+        //断点进去看
       }
 
       //测试基础的and\or\xor运算

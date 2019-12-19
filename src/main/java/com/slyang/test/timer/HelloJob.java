@@ -2,6 +2,8 @@ package com.slyang.test.timer;
 
 import org.quartz.*;
 
+import java.util.concurrent.ForkJoinPool;
+
 public class HelloJob implements Job {
 
 	// 这个对象调度完成 会被释放掉
@@ -11,6 +13,8 @@ public class HelloJob implements Job {
 	public void execute(JobExecutionContext context) throws JobExecutionException {
 
 		System.err.println("Hello!  HelloJob is start.");
+
+		ForkJoinPool forkJoinPool;
 
 		JobKey key = context.getJobDetail().getKey();
 

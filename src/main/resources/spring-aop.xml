@@ -17,6 +17,6 @@
     <!-- 定义aspect类 -->
     <bean name="myAspectJ2" class="com.slyang.test.springaop.springaop.Aspect.MyAspect2"/>
 
-    <bean name="myAspectJ3" class="com.slyang.test.springaop.springaop.Aspect.MyAspect3"/>
+<!--    <bean name="myAspectJ3" class="com.slyang.test.springaop.springaop.Aspect.MyAspect3"/>-->
 
 </beans>

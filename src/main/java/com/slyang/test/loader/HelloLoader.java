@@ -45,10 +45,18 @@ public class HelloLoader {
     public void ClassLoaderT() {
 
         ClassLoader loader = HelloLoader.class.getClassLoader();
-        while (loader != null) {
-            System.out.println(loader.toString());
-            loader = loader.getParent();
-        }
+        System.out.println(loader.toString());
+
+        loader = loader.getParent();
+        System.out.println(loader.toString());
+
+        loader = loader.getParent();
+        System.out.println(loader.toString());
+
+//        while (loader != null) {
+//            System.out.println(loader.toString());
+//            loader = loader.getParent();
+//        }
 
     }
 

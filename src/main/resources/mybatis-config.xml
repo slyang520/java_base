@@ -34,6 +34,8 @@
 
     <mappers>
         <mapper resource="mybatis_xml/myMapper.xml"/>
+        <!--没有XML 的Mapper -->
+<!--        <package name="com.slyang.test.mybatis.usexml"/>-->
     </mappers>
 
 </configuration>

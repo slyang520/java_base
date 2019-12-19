@@ -22,10 +22,10 @@ public class SpringAop {
 		//加载配置文件
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring-aop.xml");
 		UserDao userDao = (UserDao) applicationContext.getBean("userDaos");
-	    int test = userDao.addUser();
+	    int test = userDao.addUser("2222");
 
-		UserDao2 userDao2 = (UserDao2) applicationContext.getBean("userDaos2");
-		userDao2.addUser();
+//		UserDao2 userDao2 = (UserDao2) applicationContext.getBean("userDaos2");
+//		userDao2.addUser();
 
 	}
 

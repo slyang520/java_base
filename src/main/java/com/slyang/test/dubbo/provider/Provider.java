@@ -1,5 +1,6 @@
 package com.slyang.test.dubbo.provider;
 
+import com.alibaba.dubbo.registry.Registry;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Provider {
@@ -10,6 +11,8 @@ public class Provider {
 		context.start();
 		// press any key to exit
 		System.in.read();
+
+		Registry a;
 	}
 
 }

@@ -14,7 +14,7 @@ fun main(args: Array<String>) {
 
     // b = "abd"
 
-    //   ?.    操作  
+    //   ?.    操作
     // 为null 打印空 不为null正常打印
     //  bob?.department?.head?.name  有一个为null 就为null 其他正常打印
     println("String of length=${b?.length}")

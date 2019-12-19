@@ -2,8 +2,6 @@ package com.slyang.test.activiti;
 
 import org.activiti.engine.*;
 import org.activiti.engine.history.HistoricActivityInstance;
-import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
-import org.activiti.engine.impl.pvm.process.ActivityImpl;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
@@ -253,6 +251,14 @@ public class TestActivitiSpring2 {
 			logger.error("结束时间："+hai.getEndTime());
 			logger.error("===========================");
 		}
+
+
+		List<Task> list2 = processEngine.getTaskService()//
+				.createTaskQuery()//
+				.processInstanceId("12") //
+				.active()
+				.list();
+
 
 	}
 

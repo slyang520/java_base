@@ -13,10 +13,8 @@ public class TutorDynaSqlProvider {
 	public String findTutorByIdSql(final int tutorId) {
 		return new SQL() {{
 			SELECT("tutor_id as tutorId, name, email");
-			System.out.println(toString());
 			FROM("tutors");
 			WHERE("tutor_id=" + tutorId);
-			System.out.println(toString());
 		}}.toString();
 	}
 

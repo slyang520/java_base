@@ -29,9 +29,9 @@ var StringBuilder.lastChar: Char
 
 fun main(args: Array<String>) {
 
-    
+
     var view: View = Button()
-    
+
     //Button clicked
     //I'm a view!
     view.click()

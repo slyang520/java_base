@@ -1,5 +1,7 @@
 package com.slyang.test.mybatis.usexml;
 
+import com.slyang.test.mybatis.usexml.noxml.TestMapperNoXml;
+import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -24,7 +26,15 @@ public class Test {
 		try {
 			TestMapper testMapper = session.getMapper(TestMapper.class);
 			resultMap = testMapper.test();
-			
+
+			TestMapperNoXml testMapperNoXml = session.getMapper(TestMapperNoXml.class);
+			resultMap = testMapperNoXml.test();
+
+			//
+			// Configuration Executor newExecutor
+
+
+
 			System.out.println("sdfasdfasdfasfsadfsdsad");
 		} finally {
 			session.close();
