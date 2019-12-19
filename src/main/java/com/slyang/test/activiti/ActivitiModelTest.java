@@ -3,10 +3,21 @@ package com.slyang.test.activiti;
 
 import org.activiti.bpmn.converter.BpmnXMLConverter;
 import org.activiti.bpmn.model.BpmnModel;
+import org.activiti.bpmn.model.FlowElement;
+import org.activiti.bpmn.model.FlowNode;
+import org.activiti.bpmn.model.SequenceFlow;
 import org.activiti.editor.constants.ModelDataJsonConstants;
 import org.activiti.editor.language.json.converter.BpmnJsonConverter;
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.RepositoryService;
+import org.activiti.engine.impl.RepositoryServiceImpl;
+import org.activiti.engine.impl.javax.el.ExpressionFactory;
+import org.activiti.engine.impl.javax.el.ValueExpression;
+import org.activiti.engine.impl.juel.ExpressionFactoryImpl;
+import org.activiti.engine.impl.juel.SimpleContext;
+import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
+import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
+import org.activiti.engine.impl.pvm.process.ActivityImpl;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.Model;
 import org.activiti.engine.repository.ProcessDefinition;
@@ -21,6 +32,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
+import java.util.Map;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:spring-activiti.xml")
@@ -91,6 +104,51 @@ public class ActivitiModelTest {
 
 
 	}
+
+	@Test
+	public void testBmpn(){
+		ProcessDefinitionEntity processDefinitionEntity = null;
+		processDefinitionEntity = (ProcessDefinitionEntity) ((RepositoryServiceImpl) repositoryService)
+				.getDeployedProcessDefinition("123");
+		List<ActivityImpl> activitiList = processDefinitionEntity.getActivities();
+
+		ActivityImpl activityNode = processDefinitionEntity.findActivity("act_node_id");
+
+//		ExecutionEntity execution = (ExecutionEntity) runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).singleResult();
+//		//当前流程节点Id信息
+//		String activitiId = execution.getActivityId();
+
+		BpmnModel bpmnModel = repositoryService.getBpmnModel("123");
+		// 节点ID 获取元素
+		FlowElement element = bpmnModel.getFlowElement("234");
+		FlowNode flowNode = (FlowNode) element;
+
+		// 连接线 接入
+		List<SequenceFlow>  sequenceFlowIn = flowNode.getIncomingFlows();
+		// 连接线 出口
+		List<SequenceFlow>  sequenceFlowsOut = flowNode.getOutgoingFlows();
+
+		// 获取EL 表达式
+		sequenceFlowsOut.get(0).getConditionExpression();
+	}
+
+	/**
+	 * 根据key和value判断el表达式是否通过信息
+	 *
+	 * @param el           el表达式信息
+	 * @param conditionMap el表达式传入值信息
+	 * @return
+	 */
+	public static boolean isCondition(String el, Map<String, Object> conditionMap) {
+		ExpressionFactory factory = new ExpressionFactoryImpl();
+		SimpleContext context = new SimpleContext();
+		for (String key : conditionMap.keySet()) {
+			context.setVariable(key, factory.createValueExpression(conditionMap.get(key), String.class));
+		}
+		ValueExpression e = factory.createValueExpression(context, el, boolean.class);
+		return (Boolean) e.getValue(context);
+	}
+
 
 
 }
